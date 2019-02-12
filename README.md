@@ -1,5 +1,5 @@
 ## framework spring-boot+mybatis+freemarker
-
+	MongoDb、Readis NoSQL
 ##運行
 
   $ mvn spring-boot:run
@@ -8,7 +8,7 @@
 ## 目錄說明
 
  ------- src/main/java
- -------------|-----------由於反序列化，所以必須用com.etchain.....這兩個package，才能在Readis上為交易所使用
+ -------------|-----------com.etchain由於反序列化，必須用com.etchain..等package，才能在Readis上為交易所使用
  -------------|-----------controller #控制層
  -------------|-----------dao        #DAO接口
  -------------|-----------po         #實體類
