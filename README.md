@@ -1,14 +1,16 @@
 ## framework spring-boot+mybatis+freemarker
+	```
 	MongoDb、Redis NoSQL
+	```
 ##運行
-
+```
   $ mvn spring-boot:run
-
+```
 
 ## 目錄說明
-
+```
  --- src/main/java
- ----------------com.etchain#因
+ ----------------com.etchain#因Redis Serialize需使用此package
  ----------------controller #控制層
  ----------------dao        #DAO接口
  ----------------po         #實體類
@@ -21,7 +23,7 @@
  ----------------application.yml #配置文件
  ----------------logback.xml  #loback日誌配置文件
  ----------------mybatis-config.xml   #mybatis基礎配置文件
-
+```
 
 
 
