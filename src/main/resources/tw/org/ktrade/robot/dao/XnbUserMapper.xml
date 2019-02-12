@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.org.ktrade.robot.dao.XnbUserMapper">
+  <resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.XnbUser">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="moble" jdbcType="VARCHAR" property="moble" />
+    <result column="mobletime" jdbcType="INTEGER" property="mobletime" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="tpwdsetting" jdbcType="VARCHAR" property="tpwdsetting" />
+    <result column="paypassword" jdbcType="VARCHAR" property="paypassword" />
+    <result column="invit_1" jdbcType="VARCHAR" property="invit1" />
+    <result column="invit_2" jdbcType="VARCHAR" property="invit2" />
+    <result column="invit_3" jdbcType="VARCHAR" property="invit3" />
+    <result column="truename" jdbcType="VARCHAR" property="truename" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="idcardauth" jdbcType="BIT" property="idcardauth" />
+    <result column="idcardtype" jdbcType="INTEGER" property="idcardtype" />
+    <result column="idcardimg1" jdbcType="VARCHAR" property="idcardimg1" />
+    <result column="idcardimg2" jdbcType="VARCHAR" property="idcardimg2" />
+    <result column="idcardimg3" jdbcType="VARCHAR" property="idcardimg3" />
+    <result column="idcardinfo" jdbcType="VARCHAR" property="idcardinfo" />
+    <result column="logins" jdbcType="INTEGER" property="logins" />
+    <result column="ga" jdbcType="VARCHAR" property="ga" />
+    <result column="both_protect" jdbcType="BIT" property="bothProtect" />
+    <result column="addip" jdbcType="VARCHAR" property="addip" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="addtime" jdbcType="INTEGER" property="addtime" />
+    <result column="endtime" jdbcType="INTEGER" property="endtime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="alipay" jdbcType="VARCHAR" property="alipay" />
+    <result column="invit" jdbcType="VARCHAR" property="invit" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="awardid" jdbcType="INTEGER" property="awardid" />
+    <result column="awardstatus" jdbcType="SMALLINT" property="awardstatus" />
+    <result column="awardname" jdbcType="VARCHAR" property="awardname" />
+    <result column="awardNumAll" jdbcType="INTEGER" property="awardnumall" />
+    <result column="awardNumToday" jdbcType="INTEGER" property="awardnumtoday" />
+    <result column="awardTotalToday" jdbcType="INTEGER" property="awardtotaltoday" />
+    <result column="awardtime" jdbcType="INTEGER" property="awardtime" />
+    <result column="regaward" jdbcType="BIT" property="regaward" />
+    <result column="usertype" jdbcType="INTEGER" property="usertype" />
+    <result column="emailcode" jdbcType="VARCHAR" property="emailcode" />
+    <result column="emailverify" jdbcType="VARCHAR" property="emailverify" />
+    <result column="emailexpiretime" jdbcType="VARCHAR" property="emailexpiretime" />
+    <result column="is_invitgroupuser" jdbcType="INTEGER" property="isInvitgroupuser" />
+    <result column="is_invit" jdbcType="BIT" property="isInvit" />
+    <result column="allow_trade" jdbcType="BIT" property="allowTrade" />
+    <result column="allow_into" jdbcType="BIT" property="allowInto" />
+    <result column="allow_out" jdbcType="BIT" property="allowOut" />
+    <result column="auto_into" jdbcType="BIT" property="autoInto" />
+    <result column="auto_into_val" jdbcType="VARCHAR" property="autoIntoVal" />
+    <result column="edittime" jdbcType="VARCHAR" property="edittime" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="street_addr" jdbcType="VARCHAR" property="streetAddr" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+  </resultMap>
+  
+  <select id="getAllUserList" resultMap="BaseResultMap" parameterType="tw.org.ktrade.robot.po.XnbUser">
+    SELECT
+        *
+    FROM
+        xnb_user xu
+   </select>
+  
+  <insert id="insert" parameterType="tw.org.ktrade.robot.po.XnbUser">
+    insert into xnb_user (id, username, moble, 
+      mobletime, password, tpwdsetting, 
+      paypassword, invit_1, invit_2, 
+      invit_3, truename, idcard, 
+      idcardauth, idcardtype, idcardimg1, 
+      idcardimg2, idcardimg3, idcardinfo, 
+      logins, ga, both_protect, 
+      addip, addr, sort, 
+      addtime, endtime, status, 
+      email, alipay, invit, 
+      token, awardid, awardstatus, 
+      awardname, awardNumAll, awardNumToday, 
+      awardTotalToday, awardtime, regaward, 
+      usertype, emailcode, emailverify, 
+      emailexpiretime, is_invitgroupuser, is_invit, 
+      allow_trade, allow_into, allow_out, 
+      auto_into, auto_into_val, edittime, 
+      country, city, province, 
+      zip_code, street_addr, level
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{moble,jdbcType=VARCHAR}, 
+      #{mobletime,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{tpwdsetting,jdbcType=VARCHAR}, 
+      #{paypassword,jdbcType=VARCHAR}, #{invit1,jdbcType=VARCHAR}, #{invit2,jdbcType=VARCHAR}, 
+      #{invit3,jdbcType=VARCHAR}, #{truename,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{idcardauth,jdbcType=BIT}, #{idcardtype,jdbcType=INTEGER}, #{idcardimg1,jdbcType=VARCHAR}, 
+      #{idcardimg2,jdbcType=VARCHAR}, #{idcardimg3,jdbcType=VARCHAR}, #{idcardinfo,jdbcType=VARCHAR}, 
+      #{logins,jdbcType=INTEGER}, #{ga,jdbcType=VARCHAR}, #{bothProtect,jdbcType=BIT}, 
+      #{addip,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{addtime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{email,jdbcType=VARCHAR}, #{alipay,jdbcType=VARCHAR}, #{invit,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{awardid,jdbcType=INTEGER}, #{awardstatus,jdbcType=SMALLINT}, 
+      #{awardname,jdbcType=VARCHAR}, #{awardnumall,jdbcType=INTEGER}, #{awardnumtoday,jdbcType=INTEGER}, 
+      #{awardtotaltoday,jdbcType=INTEGER}, #{awardtime,jdbcType=INTEGER}, #{regaward,jdbcType=BIT}, 
+      #{usertype,jdbcType=INTEGER}, #{emailcode,jdbcType=VARCHAR}, #{emailverify,jdbcType=VARCHAR}, 
+      #{emailexpiretime,jdbcType=VARCHAR}, #{isInvitgroupuser,jdbcType=INTEGER}, #{isInvit,jdbcType=BIT}, 
+      #{allowTrade,jdbcType=BIT}, #{allowInto,jdbcType=BIT}, #{allowOut,jdbcType=BIT}, 
+      #{autoInto,jdbcType=BIT}, #{autoIntoVal,jdbcType=VARCHAR}, #{edittime,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{streetAddr,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tw.org.ktrade.robot.po.XnbUser">
+    insert into xnb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="moble != null">
+        moble,
+      </if>
+      <if test="mobletime != null">
+        mobletime,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="tpwdsetting != null">
+        tpwdsetting,
+      </if>
+      <if test="paypassword != null">
+        paypassword,
+      </if>
+      <if test="invit1 != null">
+        invit_1,
+      </if>
+      <if test="invit2 != null">
+        invit_2,
+      </if>
+      <if test="invit3 != null">
+        invit_3,
+      </if>
+      <if test="truename != null">
+        truename,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="idcardauth != null">
+        idcardauth,
+      </if>
+      <if test="idcardtype != null">
+        idcardtype,
+      </if>
+      <if test="idcardimg1 != null">
+        idcardimg1,
+      </if>
+      <if test="idcardimg2 != null">
+        idcardimg2,
+      </if>
+      <if test="idcardimg3 != null">
+        idcardimg3,
+      </if>
+      <if test="idcardinfo != null">
+        idcardinfo,
+      </if>
+      <if test="logins != null">
+        logins,
+      </if>
+      <if test="ga != null">
+        ga,
+      </if>
+      <if test="bothProtect != null">
+        both_protect,
+      </if>
+      <if test="addip != null">
+        addip,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="alipay != null">
+        alipay,
+      </if>
+      <if test="invit != null">
+        invit,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="awardid != null">
+        awardid,
+      </if>
+      <if test="awardstatus != null">
+        awardstatus,
+      </if>
+      <if test="awardname != null">
+        awardname,
+      </if>
+      <if test="awardnumall != null">
+        awardNumAll,
+      </if>
+      <if test="awardnumtoday != null">
+        awardNumToday,
+      </if>
+      <if test="awardtotaltoday != null">
+        awardTotalToday,
+      </if>
+      <if test="awardtime != null">
+        awardtime,
+      </if>
+      <if test="regaward != null">
+        regaward,
+      </if>
+      <if test="usertype != null">
+        usertype,
+      </if>
+      <if test="emailcode != null">
+        emailcode,
+      </if>
+      <if test="emailverify != null">
+        emailverify,
+      </if>
+      <if test="emailexpiretime != null">
+        emailexpiretime,
+      </if>
+      <if test="isInvitgroupuser != null">
+        is_invitgroupuser,
+      </if>
+      <if test="isInvit != null">
+        is_invit,
+      </if>
+      <if test="allowTrade != null">
+        allow_trade,
+      </if>
+      <if test="allowInto != null">
+        allow_into,
+      </if>
+      <if test="allowOut != null">
+        allow_out,
+      </if>
+      <if test="autoInto != null">
+        auto_into,
+      </if>
+      <if test="autoIntoVal != null">
+        auto_into_val,
+      </if>
+      <if test="edittime != null">
+        edittime,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="zipCode != null">
+        zip_code,
+      </if>
+      <if test="streetAddr != null">
+        street_addr,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="moble != null">
+        #{moble,jdbcType=VARCHAR},
+      </if>
+      <if test="mobletime != null">
+        #{mobletime,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tpwdsetting != null">
+        #{tpwdsetting,jdbcType=VARCHAR},
+      </if>
+      <if test="paypassword != null">
+        #{paypassword,jdbcType=VARCHAR},
+      </if>
+      <if test="invit1 != null">
+        #{invit1,jdbcType=VARCHAR},
+      </if>
+      <if test="invit2 != null">
+        #{invit2,jdbcType=VARCHAR},
+      </if>
+      <if test="invit3 != null">
+        #{invit3,jdbcType=VARCHAR},
+      </if>
+      <if test="truename != null">
+        #{truename,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardauth != null">
+        #{idcardauth,jdbcType=BIT},
+      </if>
+      <if test="idcardtype != null">
+        #{idcardtype,jdbcType=INTEGER},
+      </if>
+      <if test="idcardimg1 != null">
+        #{idcardimg1,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardimg2 != null">
+        #{idcardimg2,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardimg3 != null">
+        #{idcardimg3,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardinfo != null">
+        #{idcardinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="logins != null">
+        #{logins,jdbcType=INTEGER},
+      </if>
+      <if test="ga != null">
+        #{ga,jdbcType=VARCHAR},
+      </if>
+      <if test="bothProtect != null">
+        #{bothProtect,jdbcType=BIT},
+      </if>
+      <if test="addip != null">
+        #{addip,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="alipay != null">
+        #{alipay,jdbcType=VARCHAR},
+      </if>
+      <if test="invit != null">
+        #{invit,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="awardid != null">
+        #{awardid,jdbcType=INTEGER},
+      </if>
+      <if test="awardstatus != null">
+        #{awardstatus,jdbcType=SMALLINT},
+      </if>
+      <if test="awardname != null">
+        #{awardname,jdbcType=VARCHAR},
+      </if>
+      <if test="awardnumall != null">
+        #{awardnumall,jdbcType=INTEGER},
+      </if>
+      <if test="awardnumtoday != null">
+        #{awardnumtoday,jdbcType=INTEGER},
+      </if>
+      <if test="awardtotaltoday != null">
+        #{awardtotaltoday,jdbcType=INTEGER},
+      </if>
+      <if test="awardtime != null">
+        #{awardtime,jdbcType=INTEGER},
+      </if>
+      <if test="regaward != null">
+        #{regaward,jdbcType=BIT},
+      </if>
+      <if test="usertype != null">
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="emailcode != null">
+        #{emailcode,jdbcType=VARCHAR},
+      </if>
+      <if test="emailverify != null">
+        #{emailverify,jdbcType=VARCHAR},
+      </if>
+      <if test="emailexpiretime != null">
+        #{emailexpiretime,jdbcType=VARCHAR},
+      </if>
+      <if test="isInvitgroupuser != null">
+        #{isInvitgroupuser,jdbcType=INTEGER},
+      </if>
+      <if test="isInvit != null">
+        #{isInvit,jdbcType=BIT},
+      </if>
+      <if test="allowTrade != null">
+        #{allowTrade,jdbcType=BIT},
+      </if>
+      <if test="allowInto != null">
+        #{allowInto,jdbcType=BIT},
+      </if>
+      <if test="allowOut != null">
+        #{allowOut,jdbcType=BIT},
+      </if>
+      <if test="autoInto != null">
+        #{autoInto,jdbcType=BIT},
+      </if>
+      <if test="autoIntoVal != null">
+        #{autoIntoVal,jdbcType=VARCHAR},
+      </if>
+      <if test="edittime != null">
+        #{edittime,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null">
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetAddr != null">
+        #{streetAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+ 
+  
+</mapper>

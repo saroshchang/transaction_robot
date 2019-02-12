@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.org.ktrade.robot.dao.TradeLogMapper">
+	<resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.TradeLog">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="userid" property="userid" jdbcType="INTEGER" />
+		<result column="peerid" property="peerid" jdbcType="INTEGER" />
+		<result column="market" property="market" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="num" property="num" jdbcType="DECIMAL" />
+		<result column="mum" property="mum" jdbcType="DECIMAL" />
+		<result column="fee_buy" property="feeBuy" jdbcType="DECIMAL" />
+		<result column="fee" property="fee" jdbcType="DECIMAL" />
+		<result column="fee_sell" property="feeSell" jdbcType="DECIMAL" />
+		<result column="type" property="type" jdbcType="TINYINT" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="addtime" property="addtime" jdbcType="INTEGER" />
+		<result column="endtime" property="endtime" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="trade_id" property="tradeId" jdbcType="INTEGER" />
+		<result column="serial_number" property="serialNumber"
+			jdbcType="BIGINT" />
+	</resultMap>
+
+	<select id="getLastPrice" resultType="java.math.BigDecimal"
+		parameterType="java.lang.String">
+		select price from
+		xnb_trade_log where
+		market = #{market}
+		ORDER BY addtime desc LIMIT 1;
+	</select>
+
+
+	<select id="getAllFee" resultType="java.math.BigDecimal"
+		parameterType="java.lang.String">
+		SELECT sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log WHERE market
+		like CONCAT('%',#{market})
+		and YEARWEEK(from_unixtime(floor(addtime)/1000)) = YEARWEEK(now());
+	</select>
+
+
+	<!-- <select id="getAllFee" resultType="java.math.BigDecimal" parameterType="java.lang.String"> 
+		select sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log WHERE market 
+		like CONCAT('%',#{market}) and from_unixtime(floor(addtime)/1000) between 
+		date_sub(now(),interval 1 week) and now(); </select> -->
+
+	<select id="getSingleFee" resultType="java.math.BigDecimal"
+		parameterType="java.lang.String">
+		select sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log
+		WHERE market = #{market}
+		and from_unixtime(floor(addtime)/1000) between
+		date_sub(now(),interval 1 week) and now();
+	</select>
+	
+	<select id="getDaySingleFee" resultType="java.math.BigDecimal"
+		parameterType="java.lang.String">
+		select sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log
+		WHERE market =
+		#{market}
+		and YEARWEEK(from_unixtime(floor(addtime)/1000)) = YEARWEEK(now());
+	</select>
+
+
+
+
+	<!-- <select id="getSingleFee" resultType="java.math.BigDecimal" parameterType="java.lang.String"> 
+		SELECT sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log WHERE market 
+		= #{market} and addtime between UNIX_TIMESTAMP('2018-11-19 00:00:00.0000')*1000 
+		and UNIX_TIMESTAMP('2018-11-25 23:59:59.0000')*1000 </select> -->
+
+	<!--<select id="getSingleFee" resultType="java.math.BigDecimal" parameterType="java.lang.String"> 
+		SELECT sum(fee_buy) + sum(fee_sell) as fee FROM xnb_trade_log WHERE market 
+		= #{market} and addtime between UNIX_TIMESTAMP('2018-07-12 00:00:00.0000')*1000 
+		and UNIX_TIMESTAMP('2018-11-18 23:59:59.0000')*1000 </select> -->
+
+
+
+
+	<sql id="queryCriteriaSql">
+		<where>
+			<if test="userid != null">
+				and userid = #{userid,jdbcType=INTEGER}
+			</if>
+			<if test="peerid != null">
+				and peerid = #{peerid,jdbcType=INTEGER}
+			</if>
+			<if test="market != null">
+				and market = #{market,jdbcType=VARCHAR}
+			</if>
+			<if test="price != null">
+				and price = #{price,jdbcType=DECIMAL}
+			</if>
+			<if test="num != null">
+				and num = #{num,jdbcType=DECIMAL}
+			</if>
+			<if test="mum != null">
+				and mum = #{mum,jdbcType=DECIMAL}
+			</if>
+			<if test="feeBuy != null">
+				and fee_buy = #{feeBuy,jdbcType=DECIMAL}
+			</if>
+			<if test="feeSell != null">
+				and fee_sell = #{feeSell,jdbcType=DECIMAL}
+			</if>
+			<if test="type != null">
+				and type = #{type,jdbcType=TINYINT}
+			</if>
+			<if test="sort != null">
+				and sort = #{sort,jdbcType=INTEGER}
+			</if>
+			<if test="addtime != null">
+				and addtime = #{addtime,jdbcType=INTEGER}
+			</if>
+			<if test="endtime != null">
+				and endtime = #{endtime,jdbcType=INTEGER}
+			</if>
+			<if test="status != null">
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="tradeId != null">
+				and trade_id = #{tradeId,jdbcType=INTEGER}
+			</if>
+			<if test="serialNumber != null">
+				and serial_number = #{serialNumber,jdbcType=BIGINT}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="Base_Column_List">
+		id, userid, peerid, market, price, num, mum, fee_buy, fee_sell, type,
+		sort, addtime,
+		endtime, status, trade_id, serial_number
+	</sql>
+	<!-- 查询条件 -->
+
+	<select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from xnb_trade_log
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<!-- 查询结果总数 -->
+	<select id="pageQueryEntityCount" parameterType="tw.org.ktrade.robot.po.TradeLog"
+		resultType="java.lang.Integer">
+		select count(*) from xnb_trade_log
+		<include refid="queryCriteriaSql" />
+	</select>
+	<!-- 根据对象查询分页结果 -->
+	<select id="pageQueryEntity" parameterType="tw.org.ktrade.robot.po.TradeLog"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from xnb_trade_log
+		<include refid="queryCriteriaSql" />
+		limit #{limitBefore,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	<!-- 根据对象查询所有结果 -->
+	<select id="queryListByEntity" parameterType="tw.org.ktrade.robot.po.TradeLog"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from xnb_trade_log
+		<include refid="queryCriteriaSql" />
+	</select>
+
+	<!-- 插入数据 -->
+	<insert id="createEntity" parameterType="tw.org.ktrade.robot.po.TradeLog">
+		insert into xnb_trade_log (id, userid, peerid,
+		market, price, num,
+		mum, fee_buy, fee_sell,
+		type, sort, addtime,
+		endtime, status, trade_id,
+		serial_number)
+		values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=INTEGER},
+		#{peerid,jdbcType=INTEGER},
+		#{market,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{num,jdbcType=DECIMAL},
+		#{mum,jdbcType=DECIMAL}, #{feeBuy,jdbcType=DECIMAL},
+		#{feeSell,jdbcType=DECIMAL},
+		#{type,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{addtime,jdbcType=INTEGER},
+		#{endtime,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+		#{tradeId,jdbcType=INTEGER},
+		#{serialNumber,jdbcType=BIGINT})
+	</insert>
+	<!-- 根据ID更新数据 -->
+	<update id="updateEntity" parameterType="tw.org.ktrade.robot.po.TradeLog">
+		update xnb_trade_log
+		<set>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="peerid != null">
+				peerid = #{peerid,jdbcType=INTEGER},
+			</if>
+			<if test="market != null">
+				market = #{market,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=DECIMAL},
+			</if>
+			<if test="mum != null">
+				mum = #{mum,jdbcType=DECIMAL},
+			</if>
+			<if test="feeBuy != null">
+				fee_buy = #{feeBuy,jdbcType=DECIMAL},
+			</if>
+			<if test="feeSell != null">
+				fee_sell = #{feeSell,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
+			<if test="sort != null">
+				sort = #{sort,jdbcType=INTEGER},
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime,jdbcType=INTEGER},
+			</if>
+			<if test="endtime != null">
+				endtime = #{endtime,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="tradeId != null">
+				trade_id = #{tradeId,jdbcType=INTEGER},
+			</if>
+			<if test="serialNumber != null">
+				serial_number = #{serialNumber,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getTradeLogList" resultMap="BaseResultMap">
+		select
+		*
+		from xnb_trade_log xt
+		WHERE 1 = 1
+		<if test="tradeLog.userid != null">
+			and xt.userid = #{tradeLog.userid,jdbcType=INTEGER}
+		</if>
+		<if test="tradeLog.market != null">
+			and xt.market = #{tradeLog.market,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.status != null">
+			and xt.status = #{tradeLog.status,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.type != null">
+			and xt.type = #{tradeLog.type,jdbcType=VARCHAR}
+		</if>
+		ORDER BY xt.id DESC
+		<if test="tradeLog.type != null">
+			limit
+			#{tradeLog.limitBefore,jdbcType=INTEGER},#{tradeLog.pageSize,jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getMyTradeLogList" resultMap="BaseResultMap">
+		select
+		*
+		from xnb_trade_log xt
+		WHERE 1 = 1
+		<if test="tradeLog.userid != null">
+			and xt.userid = #{tradeLog.userid,jdbcType=INTEGER}
+		</if>
+		<if test="tradeLog.market != null">
+			and xt.market = #{tradeLog.market,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.status != null">
+			and xt.status = #{tradeLog.status,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.type != null">
+			and xt.type = #{tradeLog.type,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.tradeId != null">
+			and xt.trade_id = #{tradeLog.tradeId,jdbcType=INTEGER}
+		</if>
+		ORDER BY xt.id DESC
+	</select>
+
+	<select id="getTradeLogCount" resultType="java.lang.Integer">
+		select
+		COUNT(1)
+		from xnb_trade_log xt
+		WHERE 1 = 1
+		<if test="tradeLog.userid != null">
+			and xt.userid = #{tradeLog.userid,jdbcType=INTEGER}
+		</if>
+		<if test="tradeLog.market != null">
+			and xt.market = #{tradeLog.market,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.status != null">
+			and xt.status = #{tradeLog.status,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeLog.type != null">
+			and xt.type = #{tradeLog.type,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="getSumdByUserIdAndTradeId" resultType="java.math.BigDecimal">
+		select
+		sum(xt.mum+xt.fee_buy+xt.fee_sell)
+		from xnb_trade_log xt
+		WHERE 1 = 1
+		<if test="userId != null">
+			and xt.userid = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="tradeId != null">
+			and xt.trade_id = #{tradeId,jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

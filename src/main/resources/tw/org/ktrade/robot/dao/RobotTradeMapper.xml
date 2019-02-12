@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.org.ktrade.robot.dao.RobotTradeDao">
+    <resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.RobotTrade">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="userid" property="userId" jdbcType="INTEGER"/>
+        <result column="market" property="market" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="num" property="num" jdbcType="DECIMAL"/>
+        <result column="deal" property="deal" jdbcType="DECIMAL"/>
+        <result column="mum" property="mum" jdbcType="DECIMAL"/>
+        <result column="fee" property="fee" jdbcType="DECIMAL"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="addtime" property="addtime" jdbcType="INTEGER"/>
+        <result column="endtime" property="endtime" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="sort_num" property="sortNum" jdbcType="BIGINT"/>
+        <result column="fee_type" property="feeType" jdbcType="VARCHAR"/>
+    </resultMap>
+	
+	
+    
+    <sql id="Base_Column_List">
+        id, userid, market, price, num, deal, mum, fee, type, sort, addtime, endtime, status,
+        sort_num,fee_type
+    </sql>
+    <!-- 查询条件 -->
+    <sql id="queryCriteriaSql">
+        <where>
+            <if test="userId != null" >
+                and userid = #{userId,jdbcType=INTEGER}
+            </if>
+            <if test="market != null" >
+                and market = #{market,jdbcType=VARCHAR}
+            </if>
+            <if test="price != null" >
+                and price = #{price,jdbcType=DECIMAL}
+            </if>
+            <if test="num != null" >
+                and num = #{num,jdbcType=DECIMAL}
+            </if>
+            <if test="deal != null" >
+                and deal = #{deal,jdbcType=DECIMAL}
+            </if>
+            <if test="mum != null" >
+                and mum = #{mum,jdbcType=DECIMAL}
+            </if>
+            <if test="fee != null" >
+                and fee = #{fee,jdbcType=DECIMAL}
+            </if>
+            <if test="type != null" >
+                and type = #{type,jdbcType=TINYINT}
+            </if>
+            <if test="sort != null" >
+                and sort = #{sort,jdbcType=INTEGER}
+            </if>
+            <if test="addtime != null" >
+                and addtime = #{addtime,jdbcType=INTEGER}
+            </if>
+            <if test="endtime != null" >
+                and endtime = #{endtime,jdbcType=INTEGER}
+            </if>
+            <if test="status != null" >
+                and status = #{status,jdbcType=TINYINT}
+            </if>
+            <if test="sortNum != null" >
+                and sort_num = #{sortNum,jdbcType=BIGINT}
+            </if>
+        </where>
+    </sql>
+    <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from xnb_trade
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!-- 查询结果总数 -->
+    <select id="pageQueryEntityCount" parameterType="tw.org.ktrade.robot.po.RobotTrade" resultType="java.lang.Integer" >
+        select count(*) from xnb_trade
+        <include refid="queryCriteriaSql" />
+    </select>
+    <!-- 根据对象查询分页结果 -->
+    <select id="pageQueryList" parameterType="tw.org.ktrade.robot.po.RobotTrade" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+         from xnb_trade
+        <include refid="queryCriteriaSql" />
+        limit #{limitBefore,jdbcType=INTEGER},#{limitAfter,jdbcType=INTEGER}
+    </select>
+    <!-- 根据对象查询所有结果 -->
+    <select id="queryListByEntity" parameterType="tw.org.ktrade.robot.po.RobotTrade" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from xnb_trade
+        <include refid="queryCriteriaSql" />
+    </select>
+    <select id="updateTradeNum"  parameterType="tw.org.ktrade.robot.po.RobotTrade">
+      update xnb_trade set deal=deal+#{deal},mum=mum+#{mum},status=#{status}
+      where id=#{id}
+    </select>
+    <!-- 插入数据 -->
+    <insert id="createEntity" parameterType="tw.org.ktrade.robot.po.RobotTrade">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into xnb_trade (userid, market,
+        price, num, deal, mum,
+        fee, type, sort, addtime,
+        endtime, status, sort_num,fee_type
+        )
+        values (#{userId,jdbcType=INTEGER}, #{market,jdbcType=VARCHAR},
+        #{price,jdbcType=DECIMAL}, #{num,jdbcType=DECIMAL}, #{deal,jdbcType=DECIMAL}, #{mum,jdbcType=DECIMAL},
+        #{fee,jdbcType=DECIMAL}, #{type,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{addtime,jdbcType=INTEGER},
+        #{endtime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{sortNum,jdbcType=BIGINT},#{feeType,jdbcType=VARCHAR}
+        )
+    </insert>
+    <!-- 根据ID更新数据 -->
+    <update id="updateEntity" parameterType="tw.org.ktrade.robot.po.RobotTrade" >
+        update xnb_trade
+        <set >
+            <if test="userId != null" >
+                userid = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="market != null" >
+                market = #{market,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="num != null" >
+                num = #{num,jdbcType=DECIMAL},
+            </if>
+            <if test="deal != null" >
+                deal = #{deal,jdbcType=DECIMAL},
+            </if>
+            <if test="mum != null" >
+                mum = #{mum,jdbcType=DECIMAL},
+            </if>
+            <if test="fee != null" >
+                fee = #{fee,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=TINYINT},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="addtime != null" >
+                addtime = #{addtime,jdbcType=INTEGER},
+            </if>
+            <if test="endtime != null" >
+                endtime = #{endtime,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="sortNum != null" >
+                sort_num = #{sortNum,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    
+    <select id="getMyTradeCountByStatus" resultType="java.lang.Integer" >
+        select
+        count(1)
+        from xnb_trade xt
+        WHERE 1 = 1
+        <if test="trade.userId != null" >
+            and xt.userid = #{trade.userId,jdbcType=INTEGER}
+        </if>
+        <if test="trade.market != null" >
+            and xt.market = #{trade.market,jdbcType=VARCHAR}
+        </if>
+        <if test="trade.status != null" >
+            and xt.status = #{trade.status,jdbcType=VARCHAR}
+        </if>
+        <if test="trade.type != null" >
+            and xt.type = #{trade.type,jdbcType=VARCHAR}
+        </if>
+        <if test="map.name != null" >
+            and xt.market like concat(#{map.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="map.trading != null" >
+            and xt.market like concat('%',#{map.trading,jdbcType=VARCHAR})
+        </if>
+        <if test="map.listType != null" >
+            and xt.status = #{map.listType}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.org.ktrade.robot.dao.UserDao" >
+  <resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <id column="moble" property="moble" jdbcType="VARCHAR" />
+    <id column="mobletime" property="mobletime" jdbcType="INTEGER" />
+    <id column="password" property="password" jdbcType="VARCHAR" />
+    <id column="tpwdsetting" property="tpwdsetting" jdbcType="VARCHAR" />
+    <id column="paypassword" property="paypassword" jdbcType="VARCHAR" />
+    <id column="invit_1" property="invit1" jdbcType="VARCHAR" />
+    <id column="invit_2" property="invit2" jdbcType="VARCHAR" />
+    <id column="invit_3" property="invit3" jdbcType="VARCHAR" />
+    <id column="truename" property="truename" jdbcType="VARCHAR" />
+    <id column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <id column="idcardauth" property="idcardauth" jdbcType="INTEGER" />
+    <id column="idcardtype" property="idcardtype" jdbcType="INTEGER" />
+    <id column="idcardimg1" property="idcardimg1" jdbcType="VARCHAR" />
+    <id column="idcardimg2" property="idcardimg2" jdbcType="VARCHAR" />
+    <id column="idcardimg3" property="idcardimg3" jdbcType="VARCHAR" />
+    <id column="idcardinfo" property="idcardinfo" jdbcType="VARCHAR" />
+    <id column="logins" property="logins" jdbcType="INTEGER" />
+    <id column="ga" property="ga" jdbcType="VARCHAR" />
+    <id column="both_protect" property="bothProtect" jdbcType="INTEGER" />
+    <id column="addip" property="addip" jdbcType="VARCHAR" />
+    <id column="addr" property="addr" jdbcType="VARCHAR" />
+    <id column="sort" property="sort" jdbcType="INTEGER" />
+    <id column="addtime" property="addtime" jdbcType="INTEGER" />
+    <id column="endtime" property="endtime" jdbcType="INTEGER" />
+    <id column="status" property="status" jdbcType="INTEGER" />
+    <id column="email" property="email" jdbcType="VARCHAR" />
+    <id column="alipay" property="alipay" jdbcType="VARCHAR" />
+    <id column="invit" property="invit" jdbcType="VARCHAR" />
+    <id column="token" property="token" jdbcType="VARCHAR" />
+    <id column="awardid" property="awardid" jdbcType="INTEGER" />
+    <id column="awardstatus" property="awardstatus" jdbcType="INTEGER" />
+    <id column="awardname" property="awardname" jdbcType="VARCHAR" />
+    <id column="awardNumAll" property="awardNumAll" jdbcType="INTEGER" />
+    <id column="awardNumToday" property="awardNumToday" jdbcType="INTEGER" />
+    <id column="awardTotalToday" property="awardTotalToday" jdbcType="INTEGER" />
+    <id column="awardtime" property="awardtime" jdbcType="INTEGER" />
+    <id column="regaward" property="regaward" jdbcType="INTEGER" />
+    <id column="usertype" property="usertype" jdbcType="INTEGER" />
+    <id column="emailcode" property="emailcode" jdbcType="VARCHAR" />
+    <id column="emailverify" property="emailverify" jdbcType="VARCHAR" />
+    <id column="emailexpiretime" property="emailexpiretime" jdbcType="VARCHAR" />
+    <id column="is_invitgroupuser" property="isInvitgroupuser" jdbcType="VARCHAR" />
+    <id column="is_invit" property="isInvit" jdbcType="INTEGER" />
+    <id column="allow_trade" property="allowTrade" jdbcType="INTEGER" />
+    <id column="allow_into" property="allowInto" jdbcType="INTEGER" />
+    <id column="allow_out" property="allowOut" jdbcType="INTEGER" />
+    <id column="auto_into" property="autoInto" jdbcType="INTEGER" />
+    <id column="auto_into_val" property="autoIntoVal" jdbcType="VARCHAR" />
+    <id column="edittime" property="edittime" jdbcType="VARCHAR" />
+    <id column="country" property="country" jdbcType="VARCHAR" />
+    <id column="city" property="city" jdbcType="VARCHAR" />
+    <id column="province" property="province" jdbcType="VARCHAR" />
+    <id column="zipCode" property="zip_code" jdbcType="VARCHAR" />
+    <id column="streetAddr" property="street_addr" jdbcType="VARCHAR" />
+    <id column="level" property="level" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        *
+        from xnb_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!--  注册用户 -->
+    <insert id="register" parameterType="tw.org.ktrade.robot.po.User" >
+        insert into xnb_user
+        (username, moble, email, password,invit,addtime,mobletime,is_invitgroupuser,invit_1,idcardauth)
+        values
+        (#{username}, #{moble}, #{email}, #{password},#{invit},#{addtime},#{mobletime},#{isInvitgroupuser},#{invit1},#{idcardauth})
+    </insert>
+	
+	<select id="getInfoByParameter" resultMap="BaseResultMap" parameterType="tw.org.ktrade.robot.po.User">
+    SELECT
+        *
+    FROM
+        xnb_user xu
+    WHERE 1 = 1
+      <if test="id != null" >
+          AND xu.id = #{id}
+      </if>
+      <if test="username != null" >
+          AND xu.username = #{username}
+      </if>
+      <if test="password != null" >
+          AND xu.password = #{password}
+      </if>
+      <if test="paypassword != null" >
+          AND xu.paypassword = #{paypassword}
+      </if>
+      <if test="email != null" >
+          AND xu.email = #{email}
+      </if>
+      <if test="invit != null" >
+          AND xu.invit = #{invit}
+      </if>
+      <if test="invit1 != null" >
+          AND xu.invit_1 = #{invit1}
+      </if>
+      <if test="usertype != null" >
+          AND xu.usertype = #{usertype}
+      </if>
+      <if test="token != null" >
+          AND xu.token = #{token}
+      </if>
+  </select>
+
+    <update id="updateEntity" parameterType="tw.org.ktrade.robot.po.User">
+        update xnb_user
+        <set >
+            <if test="paypassword != null" >
+                paypassword = #{paypassword},
+            </if>
+            <if test="bothProtect != null" >
+                both_protect = #{bothProtect},
+            </if>
+            <if test="password != null" >
+                password = #{password},
+            </if>
+            <if test="moble != null" >
+                moble = #{moble},
+            </if>
+            <if test="tpwdsetting != null" >
+                tpwdsetting = #{tpwdsetting},
+            </if>
+            <if test="ga != null" >
+                ga = #{ga},
+            </if>
+            <if test="country != null" >
+                country = #{country},
+            </if>
+            <if test="province != null" >
+                province = #{province},
+            </if>
+            <if test="city != null" >
+                city = #{city},
+            </if>
+            <if test="zipCode != null" >
+                zip_code = #{zipCode},
+            </if>
+            <if test="streetAddr != null" >
+                street_addr = #{streetAddr},
+            </if>
+            <if test="truename != null" >
+                truename = #{truename},
+            </if>
+            <if test="idcard != null" >
+                idcard = #{idcard},
+            </if>
+            <if test="idcardtype != null" >
+                idcardtype = #{idcardtype},
+            </if>
+            <if test="idcardauth != null" >
+                idcardauth = #{idcardauth},
+            </if>
+            <if test="moble != null" >
+                moble = #{moble},
+            </if>
+            <if test="idcardimg1 != null" >
+                idcardimg1 = #{idcardimg1},
+            </if>
+            <if test="idcardimg2 != null" >
+                idcardimg2 = #{idcardimg2},
+            </if>
+            <if test="level != null" >
+                level = #{level},
+            </if>
+            <if test="token != null" >
+                token = #{token},
+            </if>
+            <if test="emailcode != null" >
+                emailcode = #{emailcode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <select id="findfByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT  *
+        FROM xnb_user xu
+        WHERE moble = #{phone}
+    </select>
+</mapper>

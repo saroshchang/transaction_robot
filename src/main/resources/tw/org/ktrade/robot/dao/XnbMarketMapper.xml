@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.org.ktrade.robot.dao.XnbMarketMapper">
+  <resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.XnbMarket">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fee_buy" jdbcType="VARCHAR" property="feeBuy" />
+    <result column="round" jdbcType="VARCHAR" property="round" />
+    <result column="vround" jdbcType="VARCHAR" property="vround" />
+    <result column="fee_sell" jdbcType="VARCHAR" property="feeSell" />
+    <result column="buy_min" jdbcType="VARCHAR" property="buyMin" />
+    <result column="buy_max" jdbcType="VARCHAR" property="buyMax" />
+    <result column="sell_min" jdbcType="VARCHAR" property="sellMin" />
+    <result column="sell_max" jdbcType="VARCHAR" property="sellMax" />
+    <result column="trade_min" jdbcType="VARCHAR" property="tradeMin" />
+    <result column="trade_max" jdbcType="VARCHAR" property="tradeMax" />
+    <result column="invit_buy" jdbcType="VARCHAR" property="invitBuy" />
+    <result column="invit_sell" jdbcType="VARCHAR" property="invitSell" />
+    <result column="invit_1" jdbcType="VARCHAR" property="invit1" />
+    <result column="invit_2" jdbcType="VARCHAR" property="invit2" />
+    <result column="invit_3" jdbcType="VARCHAR" property="invit3" />
+    <result column="zhang" jdbcType="VARCHAR" property="zhang" />
+    <result column="die" jdbcType="VARCHAR" property="die" />
+    <result column="hou_price" jdbcType="VARCHAR" property="houPrice" />
+    <result column="tendency" jdbcType="VARCHAR" property="tendency" />
+    <result column="trade" jdbcType="INTEGER" property="trade" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="buy_price" jdbcType="DECIMAL" property="buyPrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="min_price" jdbcType="DECIMAL" property="minPrice" />
+    <result column="max_price" jdbcType="DECIMAL" property="maxPrice" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="change" jdbcType="DECIMAL" property="change" />
+    <result column="api_min" jdbcType="DECIMAL" property="apiMin" />
+    <result column="api_max" jdbcType="DECIMAL" property="apiMax" />
+    <result column="begintrade" jdbcType="VARCHAR" property="begintrade" />
+    <result column="endtrade" jdbcType="VARCHAR" property="endtrade" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="addtime" jdbcType="INTEGER" property="addtime" />
+    <result column="endtime" jdbcType="INTEGER" property="endtime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="jiaoyiqu" jdbcType="BIT" property="jiaoyiqu" />
+    <result column="faxingjia" jdbcType="REAL" property="faxingjia" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, fee_buy, round, vround, fee_sell, buy_min, buy_max, sell_min, sell_max, 
+    trade_min, trade_max, invit_buy, invit_sell, invit_1, invit_2, invit_3, zhang, die, 
+    hou_price, tendency, trade, new_price, buy_price, sell_price, min_price, max_price, 
+    volume, change, api_min, api_max, begintrade, endtrade, sort, addtime, endtime, status, 
+    jiaoyiqu, faxingjia
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xnb_market
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xnb_market
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="tw.org.ktrade.robot.po.XnbMarket">
+    insert into xnb_market (id, name, fee_buy, 
+      round, vround, fee_sell, 
+      buy_min, buy_max, sell_min, 
+      sell_max, trade_min, trade_max, 
+      invit_buy, invit_sell, invit_1, 
+      invit_2, invit_3, zhang, 
+      die, hou_price, tendency, 
+      trade, new_price, buy_price, 
+      sell_price, min_price, max_price, 
+      volume, change, api_min, 
+      api_max, begintrade, endtrade, 
+      sort, addtime, endtime, 
+      status, jiaoyiqu, faxingjia
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{feeBuy,jdbcType=VARCHAR}, 
+      #{round,jdbcType=VARCHAR}, #{vround,jdbcType=VARCHAR}, #{feeSell,jdbcType=VARCHAR}, 
+      #{buyMin,jdbcType=VARCHAR}, #{buyMax,jdbcType=VARCHAR}, #{sellMin,jdbcType=VARCHAR}, 
+      #{sellMax,jdbcType=VARCHAR}, #{tradeMin,jdbcType=VARCHAR}, #{tradeMax,jdbcType=VARCHAR}, 
+      #{invitBuy,jdbcType=VARCHAR}, #{invitSell,jdbcType=VARCHAR}, #{invit1,jdbcType=VARCHAR}, 
+      #{invit2,jdbcType=VARCHAR}, #{invit3,jdbcType=VARCHAR}, #{zhang,jdbcType=VARCHAR}, 
+      #{die,jdbcType=VARCHAR}, #{houPrice,jdbcType=VARCHAR}, #{tendency,jdbcType=VARCHAR}, 
+      #{trade,jdbcType=INTEGER}, #{newPrice,jdbcType=DECIMAL}, #{buyPrice,jdbcType=DECIMAL}, 
+      #{sellPrice,jdbcType=DECIMAL}, #{minPrice,jdbcType=DECIMAL}, #{maxPrice,jdbcType=DECIMAL}, 
+      #{volume,jdbcType=DECIMAL}, #{change,jdbcType=DECIMAL}, #{apiMin,jdbcType=DECIMAL}, 
+      #{apiMax,jdbcType=DECIMAL}, #{begintrade,jdbcType=VARCHAR}, #{endtrade,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{addtime,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{jiaoyiqu,jdbcType=BIT}, #{faxingjia,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="tw.org.ktrade.robot.po.XnbMarket">
+    insert into xnb_market
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="feeBuy != null">
+        fee_buy,
+      </if>
+      <if test="round != null">
+        round,
+      </if>
+      <if test="vround != null">
+        vround,
+      </if>
+      <if test="feeSell != null">
+        fee_sell,
+      </if>
+      <if test="buyMin != null">
+        buy_min,
+      </if>
+      <if test="buyMax != null">
+        buy_max,
+      </if>
+      <if test="sellMin != null">
+        sell_min,
+      </if>
+      <if test="sellMax != null">
+        sell_max,
+      </if>
+      <if test="tradeMin != null">
+        trade_min,
+      </if>
+      <if test="tradeMax != null">
+        trade_max,
+      </if>
+      <if test="invitBuy != null">
+        invit_buy,
+      </if>
+      <if test="invitSell != null">
+        invit_sell,
+      </if>
+      <if test="invit1 != null">
+        invit_1,
+      </if>
+      <if test="invit2 != null">
+        invit_2,
+      </if>
+      <if test="invit3 != null">
+        invit_3,
+      </if>
+      <if test="zhang != null">
+        zhang,
+      </if>
+      <if test="die != null">
+        die,
+      </if>
+      <if test="houPrice != null">
+        hou_price,
+      </if>
+      <if test="tendency != null">
+        tendency,
+      </if>
+      <if test="trade != null">
+        trade,
+      </if>
+      <if test="newPrice != null">
+        new_price,
+      </if>
+      <if test="buyPrice != null">
+        buy_price,
+      </if>
+      <if test="sellPrice != null">
+        sell_price,
+      </if>
+      <if test="minPrice != null">
+        min_price,
+      </if>
+      <if test="maxPrice != null">
+        max_price,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="change != null">
+        change,
+      </if>
+      <if test="apiMin != null">
+        api_min,
+      </if>
+      <if test="apiMax != null">
+        api_max,
+      </if>
+      <if test="begintrade != null">
+        begintrade,
+      </if>
+      <if test="endtrade != null">
+        endtrade,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="jiaoyiqu != null">
+        jiaoyiqu,
+      </if>
+      <if test="faxingjia != null">
+        faxingjia,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feeBuy != null">
+        #{feeBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="round != null">
+        #{round,jdbcType=VARCHAR},
+      </if>
+      <if test="vround != null">
+        #{vround,jdbcType=VARCHAR},
+      </if>
+      <if test="feeSell != null">
+        #{feeSell,jdbcType=VARCHAR},
+      </if>
+      <if test="buyMin != null">
+        #{buyMin,jdbcType=VARCHAR},
+      </if>
+      <if test="buyMax != null">
+        #{buyMax,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMin != null">
+        #{sellMin,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMax != null">
+        #{sellMax,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMin != null">
+        #{tradeMin,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMax != null">
+        #{tradeMax,jdbcType=VARCHAR},
+      </if>
+      <if test="invitBuy != null">
+        #{invitBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="invitSell != null">
+        #{invitSell,jdbcType=VARCHAR},
+      </if>
+      <if test="invit1 != null">
+        #{invit1,jdbcType=VARCHAR},
+      </if>
+      <if test="invit2 != null">
+        #{invit2,jdbcType=VARCHAR},
+      </if>
+      <if test="invit3 != null">
+        #{invit3,jdbcType=VARCHAR},
+      </if>
+      <if test="zhang != null">
+        #{zhang,jdbcType=VARCHAR},
+      </if>
+      <if test="die != null">
+        #{die,jdbcType=VARCHAR},
+      </if>
+      <if test="houPrice != null">
+        #{houPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="tendency != null">
+        #{tendency,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null">
+        #{trade,jdbcType=INTEGER},
+      </if>
+      <if test="newPrice != null">
+        #{newPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPrice != null">
+        #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null">
+        #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null">
+        #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="change != null">
+        #{change,jdbcType=DECIMAL},
+      </if>
+      <if test="apiMin != null">
+        #{apiMin,jdbcType=DECIMAL},
+      </if>
+      <if test="apiMax != null">
+        #{apiMax,jdbcType=DECIMAL},
+      </if>
+      <if test="begintrade != null">
+        #{begintrade,jdbcType=VARCHAR},
+      </if>
+      <if test="endtrade != null">
+        #{endtrade,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="jiaoyiqu != null">
+        #{jiaoyiqu,jdbcType=BIT},
+      </if>
+      <if test="faxingjia != null">
+        #{faxingjia,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tw.org.ktrade.robot.po.XnbMarket">
+    update xnb_market
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feeBuy != null">
+        fee_buy = #{feeBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="round != null">
+        round = #{round,jdbcType=VARCHAR},
+      </if>
+      <if test="vround != null">
+        vround = #{vround,jdbcType=VARCHAR},
+      </if>
+      <if test="feeSell != null">
+        fee_sell = #{feeSell,jdbcType=VARCHAR},
+      </if>
+      <if test="buyMin != null">
+        buy_min = #{buyMin,jdbcType=VARCHAR},
+      </if>
+      <if test="buyMax != null">
+        buy_max = #{buyMax,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMin != null">
+        sell_min = #{sellMin,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMax != null">
+        sell_max = #{sellMax,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMin != null">
+        trade_min = #{tradeMin,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMax != null">
+        trade_max = #{tradeMax,jdbcType=VARCHAR},
+      </if>
+      <if test="invitBuy != null">
+        invit_buy = #{invitBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="invitSell != null">
+        invit_sell = #{invitSell,jdbcType=VARCHAR},
+      </if>
+      <if test="invit1 != null">
+        invit_1 = #{invit1,jdbcType=VARCHAR},
+      </if>
+      <if test="invit2 != null">
+        invit_2 = #{invit2,jdbcType=VARCHAR},
+      </if>
+      <if test="invit3 != null">
+        invit_3 = #{invit3,jdbcType=VARCHAR},
+      </if>
+      <if test="zhang != null">
+        zhang = #{zhang,jdbcType=VARCHAR},
+      </if>
+      <if test="die != null">
+        die = #{die,jdbcType=VARCHAR},
+      </if>
+      <if test="houPrice != null">
+        hou_price = #{houPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="tendency != null">
+        tendency = #{tendency,jdbcType=VARCHAR},
+      </if>
+      <if test="trade != null">
+        trade = #{trade,jdbcType=INTEGER},
+      </if>
+      <if test="newPrice != null">
+        new_price = #{newPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPrice != null">
+        buy_price = #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="minPrice != null">
+        min_price = #{minPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="maxPrice != null">
+        max_price = #{maxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="change != null">
+        change = #{change,jdbcType=DECIMAL},
+      </if>
+      <if test="apiMin != null">
+        api_min = #{apiMin,jdbcType=DECIMAL},
+      </if>
+      <if test="apiMax != null">
+        api_max = #{apiMax,jdbcType=DECIMAL},
+      </if>
+      <if test="begintrade != null">
+        begintrade = #{begintrade,jdbcType=VARCHAR},
+      </if>
+      <if test="endtrade != null">
+        endtrade = #{endtrade,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        addtime = #{addtime,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="jiaoyiqu != null">
+        jiaoyiqu = #{jiaoyiqu,jdbcType=BIT},
+      </if>
+      <if test="faxingjia != null">
+        faxingjia = #{faxingjia,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="tw.org.ktrade.robot.po.XnbMarket">
+    update xnb_market
+    set name = #{name,jdbcType=VARCHAR},
+      fee_buy = #{feeBuy,jdbcType=VARCHAR},
+      round = #{round,jdbcType=VARCHAR},
+      vround = #{vround,jdbcType=VARCHAR},
+      fee_sell = #{feeSell,jdbcType=VARCHAR},
+      buy_min = #{buyMin,jdbcType=VARCHAR},
+      buy_max = #{buyMax,jdbcType=VARCHAR},
+      sell_min = #{sellMin,jdbcType=VARCHAR},
+      sell_max = #{sellMax,jdbcType=VARCHAR},
+      trade_min = #{tradeMin,jdbcType=VARCHAR},
+      trade_max = #{tradeMax,jdbcType=VARCHAR},
+      invit_buy = #{invitBuy,jdbcType=VARCHAR},
+      invit_sell = #{invitSell,jdbcType=VARCHAR},
+      invit_1 = #{invit1,jdbcType=VARCHAR},
+      invit_2 = #{invit2,jdbcType=VARCHAR},
+      invit_3 = #{invit3,jdbcType=VARCHAR},
+      zhang = #{zhang,jdbcType=VARCHAR},
+      die = #{die,jdbcType=VARCHAR},
+      hou_price = #{houPrice,jdbcType=VARCHAR},
+      tendency = #{tendency,jdbcType=VARCHAR},
+      trade = #{trade,jdbcType=INTEGER},
+      new_price = #{newPrice,jdbcType=DECIMAL},
+      buy_price = #{buyPrice,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      min_price = #{minPrice,jdbcType=DECIMAL},
+      max_price = #{maxPrice,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=DECIMAL},
+      change = #{change,jdbcType=DECIMAL},
+      api_min = #{apiMin,jdbcType=DECIMAL},
+      api_max = #{apiMax,jdbcType=DECIMAL},
+      begintrade = #{begintrade,jdbcType=VARCHAR},
+      endtrade = #{endtrade,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=INTEGER},
+      endtime = #{endtime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      jiaoyiqu = #{jiaoyiqu,jdbcType=BIT},
+      faxingjia = #{faxingjia,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

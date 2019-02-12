@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.org.ktrade.robot.dao.UserCoinDao">
+	<resultMap id="BaseResultMap"
+		type="tw.org.ktrade.robot.po.UserCoin">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<id column="userid" property="userId" jdbcType="INTEGER" />
+		<id column="btc" property="btc" jdbcType="DECIMAL" />
+		<id column="btcd" property="btcd" jdbcType="DECIMAL" />
+		<id column="btcb" property="btcb" jdbcType="VARCHAR" />
+		<id column="secret_key" property="secretKey" jdbcType="VARCHAR" />
+		<id column="pass_word" property="passWord" jdbcType="VARCHAR" />
+		<id column="eth" property="eth" jdbcType="DECIMAL" />
+		<id column="ethd" property="ethd" jdbcType="DECIMAL" />
+		<id column="ethb" property="ethb" jdbcType="VARCHAR" />
+		<id column="kcoin" property="kcoin" jdbcType="DECIMAL" />
+		<id column="kcoind" property="kcoind" jdbcType="DECIMAL" />
+		<id column="kcoinb" property="kcoinb" jdbcType="VARCHAR" />
+		<id column="ipt" property="ipt" jdbcType="DECIMAL" />
+		<id column="iptd" property="iptd" jdbcType="DECIMAL" />
+		<id column="iptb" property="iptb" jdbcType="VARCHAR" />
+		<id column="nuls" property="nuls" jdbcType="DECIMAL" />
+		<id column="nulsd" property="nulsd" jdbcType="DECIMAL" />
+		<id column="nulsb" property="nulsb" jdbcType="VARCHAR" />
+		<id column="xrp" property="xrp" jdbcType="DECIMAL" />
+		<id column="xrpd" property="xrpd" jdbcType="DECIMAL" />
+		<id column="xrpb" property="xrpb" jdbcType="VARCHAR" />
+		<id column="bbc" property="bbc" jdbcType="DECIMAL" />
+		<id column="bbcd" property="bbcd" jdbcType="DECIMAL" />
+		<id column="bbcb" property="bbcb" jdbcType="VARCHAR" />
+		<id column="qtum" property="qtum" jdbcType="DECIMAL" />
+		<id column="qtumd" property="qtumd" jdbcType="DECIMAL" />
+		<id column="qtumb" property="qtumb" jdbcType="VARCHAR" />
+		<id column="hlc" property="hlc" jdbcType="DECIMAL" />
+		<id column="hlcd" property="hlcd" jdbcType="DECIMAL" />
+		<id column="hlcb" property="hlcb" jdbcType="VARCHAR" />
+		<id column="twdt" property="twdt" jdbcType="DECIMAL" />
+		<id column="twdtd" property="twdtd" jdbcType="DECIMAL" />
+		<id column="twdtb" property="twdtb" jdbcType="VARCHAR" />
+		<id column="usdt" property="usdt" jdbcType="DECIMAL" />
+		<id column="usdtd" property="usdtd" jdbcType="DECIMAL" />
+		<id column="usdtb" property="usdtb" jdbcType="VARCHAR" />
+		<id column="bch" property="bch" jdbcType="DECIMAL" />
+		<id column="bchd" property="bchd" jdbcType="DECIMAL" />
+		<id column="bchb" property="bchb" jdbcType="VARCHAR" />
+		<id column="kt" property="kt" jdbcType="DECIMAL" />
+		<id column="ktd" property="ktd" jdbcType="DECIMAL" />
+		<id column="ktb" property="ktb" jdbcType="VARCHAR" />
+		<id column="dash" property="dash" jdbcType="DECIMAL" />
+		<id column="dashd" property="dashd" jdbcType="DECIMAL" />
+		<id column="dashb" property="dashb" jdbcType="VARCHAR" />
+		<id column="xmr" property="xmr" jdbcType="DECIMAL" />
+		<id column="xmrd" property="xmrd" jdbcType="DECIMAL" />
+		<id column="xmrb" property="xmrb" jdbcType="VARCHAR" />
+		<id column="xmrp" property="xmrp" jdbcType="VARCHAR" />
+		<id column="fto" property="fto" jdbcType="DECIMAL" />
+		<id column="ftod" property="ftod" jdbcType="DECIMAL" />
+		<id column="ftob" property="ftob" jdbcType="VARCHAR" />
+		<id column="btx" property="btx" jdbcType="DECIMAL" />
+		<id column="btxd" property="btxd" jdbcType="DECIMAL" />
+		<id column="btxb" property="btxb" jdbcType="VARCHAR" />
+		<id column="cpc" property="cpc" jdbcType="DECIMAL" />
+		<id column="cpcd" property="cpcd" jdbcType="DECIMAL" />
+		<id column="cpcb" property="cpcb" jdbcType="VARCHAR" />
+		<id column="sbt" property="sbt" jdbcType="DECIMAL" />
+		<id column="sbtd" property="sbtd" jdbcType="DECIMAL" />
+		<id column="sbtb" property="sbtb" jdbcType="VARCHAR" />
+		<id column="sosr" property="sosr" jdbcType="DECIMAL" />
+		<id column="sosrd" property="sosrd" jdbcType="DECIMAL" />
+		<id column="sosrb" property="sosrb" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<select id="getAllUserCoin" resultMap="BaseResultMap">
+	SELECT * FROM xnb_user_coin where kt > 1
+	</select>
+	
+	<update id="addUserKtCoin" >
+		update xnb_user_coin set kt=kt+#{coin}
+		where userid =#{userId}
+	</update>
+	
+	<update id="addUserBtcCoin" >
+		update xnb_user_coin set btc=btc+#{coin}
+		where userid =#{userId}
+	</update>
+	
+	<update id="addUserEthCoin" >
+		update xnb_user_coin set eth=eth+#{coin}
+		where userid =#{userId}
+	</update>
+	
+	<update id="addUserUsdtCoin" >
+		update xnb_user_coin set usdt=usdt+#{coin}
+		where userid =#{userId}
+	</update>
+	
+	<update id="addUserTwdtCoin" >
+		update xnb_user_coin set twdt=twdt+#{coin}
+		where userid =#{userId}
+	</update>
+	
+	<!-- 创建用户资产 -->
+	<insert id="createEntity"
+		parameterType="tw.org.ktrade.robot.po.UserCoin">
+		insert into xnb_user_coin
+		(userid,btc,eth,kcoin,ipt,nuls,xrp,bbc,qtum,hlc,twdt,usdt,bch,kt,dash,xmr,fto,btx,cpc,sbt,sosr)
+		values
+		(#{userId},#{btc},#{eth},#{kcoin},#{ipt},#{nuls},#{xrp},#{bbc},#{qtum},#{hlc},#{twdt},#{usdt},#{bch},#{kt},#{dash},#{xmr},#{fto},#{btx},#{cpc},#{sbt},#{sosr})
+	</insert>
+
+	<select id="queryByEntity" resultMap="BaseResultMap"
+		parameterType="tw.org.ktrade.robot.po.UserCoin">
+		SELECT
+		IFNULL(xuc.btc,0) btc,
+		IFNULL(xuc.btcd,0) btcd,
+		IFNULL(xuc.eth,0) eth,
+		IFNULL(xuc.ethd,0) ethd,
+		IFNULL(xuc.kcoin,0) kcoin,
+		IFNULL(xuc.kcoind,0) kcoind,
+		IFNULL(xuc.ipt,0) ipt,
+		IFNULL(xuc.iptd,0) iptd,
+		IFNULL(xuc.nuls,0) nuls,
+		IFNULL(xuc.nulsd,0) nulsd,
+		IFNULL(xuc.xrp,0) xrp,
+		IFNULL(xuc.xrpd,0) xrpd,
+		IFNULL(xuc.bbc,0) bbc,
+		IFNULL(xuc.bbcd,0) bbcd,
+		IFNULL(xuc.qtum,0) qtum,
+		IFNULL(xuc.qtumd,0) qtumd,
+		IFNULL(xuc.hlc,0) hlc,
+		IFNULL(xuc.hlcd,0) hlcd,
+		IFNULL(xuc.twdt,0) twdt,
+		IFNULL(xuc.twdtd,0) twdtd,
+		IFNULL(xuc.usdt,0) usdt,
+		IFNULL(xuc.usdtd,0) usdtd,
+		IFNULL(xuc.bch,0) bch,
+		IFNULL(xuc.bchd,0) bchd,
+		IFNULL(xuc.kt,0) kt,
+		IFNULL(xuc.ktd,0) ktd,
+		IFNULL(xuc.dash,0) dash,
+		IFNULL(xuc.dashd,0) dashd,
+		IFNULL(xuc.xmr,0) xmr,
+		IFNULL(xuc.xmrd,0) xmrd,
+		IFNULL(xuc.fto,0) fto,
+		IFNULL(xuc.ftod,0) ftod,
+		IFNULL(xuc.btx,0) btx,
+		IFNULL(xuc.btxd,0) btxd,
+		IFNULL(xuc.cpc,0) cpc,
+		IFNULL(xuc.cpcd,0) cpcd,
+		IFNULL(xuc.sbt,0) sbt,
+		IFNULL(xuc.sbtd,0) sbtd,
+		IFNULL(xuc.sosr,0) sosr,
+		IFNULL(xuc.sosrd,0) sosrd,
+		xuc.id,
+		xuc.userid,
+		xuc.btcb,
+		xuc.secret_key,
+		xuc.pass_word,
+		xuc.ethb,
+		xuc.kcoinb,
+		xuc.iptb,
+		xuc.nulsb,
+		xuc.xrpb,
+		xuc.bbcb,
+		xuc.qtumb,
+		xuc.hlcb,
+		xuc.twdtb,
+		xuc.usdtb,
+		xuc.bchb,
+		xuc.ktb,
+		xuc.usdtb,
+		xuc.bchb,
+		xuc.ktb,
+		xuc.dashb,
+		xuc.xmrb,
+		xuc.xmrp,
+		xuc.ftob,
+		xuc.btxb,
+		xuc.cpcb,
+		xuc.sbtb,
+		xuc.sosrb
+		FROM
+		xnb_user_coin xuc
+		WHERE 1 = 1
+		<if test="id != null">
+			AND xuc.id = #{id}
+		</if>
+		<if test="userId != null">
+			AND xuc.userid = #{userId}
+		</if>
+		<if test="btcb != null">
+			AND xuc.btcb = #{btcb}
+		</if>
+		<if test="kcoinb != null">
+			AND xuc.kcoinb = #{kcoinb}
+		</if>
+		<if test="ethb != null">
+			AND xuc.ethb = #{ethb}
+		</if>
+		<if test="iptb != null">
+			AND xuc.iptb = #{iptb}
+		</if>
+		<if test="nulsb != null">
+			AND xuc.nulsb = #{nulsb}
+		</if>
+		<if test="xrpb != null">
+			AND xuc.xrpb = #{xrpb}
+		</if>
+		<if test="bbcb != null">
+			AND xuc.bbcb = #{bbcb}
+		</if>
+		<if test="qtumb != null">
+			AND xuc.qtumb = #{qtumb}
+		</if>
+		<if test="hlcb != null">
+			AND xuc.hlcb = #{hlcb}
+		</if>
+		<if test="twdtb != null">
+			AND xuc.twdtb = #{twdtb}
+		</if>
+		<if test="usdtb != null">
+			AND xuc.usdtb = #{usdtb}
+		</if>
+		<if test="bchb != null">
+			AND xuc.bchb = #{bchb}
+		</if>
+		<if test="ktb != null">
+			AND xuc.ktb = #{ktb}
+		</if>
+		<if test="dashb != null">
+			AND xuc.dashb = #{dashb}
+		</if>
+		<if test="xmrb != null">
+			AND xuc.xmrb = #{xmrb}
+		</if>
+		<if test="xmrp != null">
+			AND xuc.xmrp = #{xmrp}
+		</if>
+		<if test="ftob != null">
+			AND xuc.ftob = #{ftob}
+		</if>
+		<if test="btxb != null">
+			AND xuc.btxb = #{btxb}
+		</if>
+		<if test="cpcb != null">
+			AND xuc.cpcb = #{cpcb}
+		</if>
+		<if test="sbtb != null">
+			AND xuc.sbtb = #{sbtb}
+		</if>
+		<if test="sosrb != null">
+			AND xuc.sosrb = #{sosrb}
+		</if>
+	</select>
+
+	<update id="updateEntity"
+		parameterType="tw.org.ktrade.robot.po.UserCoin">
+		update xnb_user_coin
+		<set>
+			<if test="btc != null">
+				btc = #{btc},
+			</if>
+			<if test="btcd != null">
+				btcd = #{btcd},
+			</if>
+			<if test="eth != null">
+				eth = #{eth},
+			</if>
+			<if test="ethd != null">
+				ethd = #{ethd},
+			</if>
+			<if test="kcoin != null">
+				kcoin = #{kcoin},
+			</if>
+			<if test="kcoind != null">
+				kcoind = #{kcoind},
+			</if>
+			<if test="btcb != null">
+				btcb = #{btcb},
+			</if>
+			<if test="kcoinb != null">
+				kcoinb = #{kcoinb},
+			</if>
+			<if test="ethb != null">
+				ethb = #{ethb},
+			</if>
+			<if test="iptb != null">
+				iptb = #{iptb},
+			</if>
+			<if test="ipt != null">
+				ipt = #{ipt},
+			</if>
+			<if test="iptd != null">
+				iptd = #{iptd},
+			</if>
+			<if test="nulsb != null">
+				nulsb = #{nulsb},
+			</if>
+			<if test="nuls != null">
+				nuls = #{nuls},
+			</if>
+			<if test="nulsd != null">
+				nulsd = #{nulsd},
+			</if>
+			<if test="xrpb != null">
+				xrpb = #{xrpb},
+			</if>
+			<if test="xrp != null">
+				xrp = #{xrp},
+			</if>
+			<if test="xrpd != null">
+				xrpd = #{xrpd},
+			</if>
+			<if test="bbc != null">
+				bbc = #{bbc},
+			</if>
+			<if test="bbcd != null">
+				bbcd = #{bbcd},
+			</if>
+			<if test="bbcb != null">
+				bbcb = #{bbcb},
+			</if>
+			<if test="qtum != null">
+				qtum = #{qtum},
+			</if>
+			<if test="qtumd != null">
+				qtumd = #{qtumd},
+			</if>
+			<if test="qtumb != null">
+				qtumb = #{qtumb},
+			</if>
+			<if test="hlc != null">
+				hlc = #{hlc},
+			</if>
+			<if test="hlcd != null">
+				hlcd = #{hlcd},
+			</if>
+			<if test="hlcb != null">
+				hlcb = #{hlcb},
+			</if>
+			<if test="twdt != null">
+				twdt = #{twdt},
+			</if>
+			<if test="twdtd != null">
+				twdtd = #{twdtd},
+			</if>
+			<if test="twdtb != null">
+				twdtb = #{twdtb},
+			</if>
+
+			<if test="usdt != null">
+				usdt = #{usdt},
+			</if>
+			<if test="usdtd != null">
+				usdtd = #{usdtd},
+			</if>
+			<if test="usdtb != null">
+				usdtb = #{usdtb},
+			</if>
+			<if test="bch != null">
+				bch = #{bch},
+			</if>
+			<if test="bchd != null">
+				bchd = #{bchd},
+			</if>
+			<if test="bchb != null">
+				bchb = #{bchb},
+			</if>
+			<if test="kt != null">
+				kt = #{kt},
+			</if>
+			<if test="ktd != null">
+				ktd = #{ktd},
+			</if>
+			<if test="ktb != null">
+				ktb = #{ktb},
+			</if>
+			<if test="dash != null">
+				dash = #{dash},
+			</if>
+			<if test="dashd != null">
+				dashd = #{dashd},
+			</if>
+			<if test="dashb != null">
+				dashb = #{dashb},
+			</if>
+			<if test="xmr != null">
+				xmr = #{xmr},
+			</if>
+			<if test="xmrd != null">
+				xmrd = #{xmrd},
+			</if>
+			<if test="xmrb != null">
+				xmrb = #{xmrb},
+			</if>
+			<if test="xmrp != null">
+				xmrp = #{xmrp},
+			</if>
+			<if test="fto != null">
+				fto = #{fto},
+			</if>
+			<if test="ftod != null">
+				ftod = #{ftod},
+			</if>
+			<if test="ftob != null">
+				ftob = #{ftob},
+			</if>
+			<if test="btx != null">
+				btx = #{btx},
+			</if>
+			<if test="btxd != null">
+				btxd = #{btxd},
+			</if>
+			<if test="btxb != null">
+				btxb = #{btxb},
+			</if>
+			<if test="cpc != null">
+				cpc = #{cpc},
+			</if>
+			<if test="cpcd != null">
+				cpcd = #{cpcd},
+			</if>
+			<if test="cpcb != null">
+				cpcb = #{cpcb},
+			</if>
+			<if test="sbt != null">
+				sbt = #{sbt},
+			</if>
+			<if test="sbtd != null">
+				sbtd = #{sbtd},
+			</if>
+			<if test="sbtb != null">
+				sbtb = #{sbtb},
+			</if>
+			<if test="sosr != null">
+				sosr = #{sosr},
+			</if>
+			<if test="sosrd != null">
+				sosrd = #{sosrd},
+			</if>
+			<if test="sosrb != null">
+				sosrb = #{sosrb},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<!--更新个人资产 -->
+	<update id="updateUserCoinAccount">
+		update xnb_user_coin set
+		${userAccountName}d = ${userAccountName}d+#{userThawAmount},${userAccountName} =
+		${userAccountName}+#{userDeductTheAmount},
+		${peerAccountName}d=${peerAccountName}d+#{peerThawAmount},${peerAccountName}=${peerAccountName}+#{peerDeductTheAmount}
+		where userid = #{userid}
+
+	</update>
+
+	<!--挂单时更新个人资产 -->
+	<update id="updateUserCoinToTrade">
+		update xnb_user_coin set
+		${coinName} = ${coinName}-#{freeze},${coinName}d = ${coinName}d+#{freeze}
+		where userid = #{userId}
+	</update>
+
+	<!--挂单时更新个人资产2 -->
+	<update id="updateUserCoinToTrade2">
+		update xnb_user_coin set
+		${coinName} = ${coinName}-#{freeze},${coinName}d = ${coinName}d+#{freeze},
+		${feeType} = ${feeType}-#{fee},${feeType}d = ${feeType}d+#{fee}
+		where userid = #{userId}
+	</update>
+
+	<!--挂单时更新个人资产 -->
+	<update id="updatePoundageAccount">
+		update xnb_user_coin set
+		${coinName} = ${coinName}+#{poundage}
+		where userid = #{userId}
+	</update>
+
+	<!--充值 -->
+	<update id="updateEntityToTurnIn">
+		update xnb_user_coin set
+		${name} = ${name} + #{num}
+		where ${name}b = #{addr}
+	</update>
+	
+		<!--充值 -->
+	<update id="updateEntityToTurnInForPaymentId">
+		update xnb_user_coin set
+		${name} = ${name} + #{num}
+		where ${name}p = #{addr}
+	</update>
+
+	<update id="updateUserCoinAccountByUserId">
+		UPDATE xnb_user_coin
+		SET ${coinName} = #{num}
+		WHERE userid = #{userId}
+	</update>
+
+	<select id="getCoinNumByUserId" resultType="java.lang.Double">
+		SELECT
+		${coinName}
+		FROM xnb_user_coin
+		WHERE userid = #{userId}
+	</select>
+</mapper>

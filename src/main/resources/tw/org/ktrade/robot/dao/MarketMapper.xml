@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="tw.org.ktrade.robot.dao.MarketDao" >
+  <resultMap id="BaseResultMap" type="tw.org.ktrade.robot.po.Market" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <id column="round" property="round" jdbcType="VARCHAR" />
+    <id column="vround" property="vround" jdbcType="VARCHAR" />
+    <id column="fee_buy" property="feeBuy" jdbcType="VARCHAR" />
+    <id column="fee_sell" property="feeSell" jdbcType="VARCHAR" />
+    <id column="buy_min" property="buyMin" jdbcType="VARCHAR" />
+    <id column="buy_max" property="buyMax" jdbcType="VARCHAR" />
+    <id column="sell_min" property="sellMin" jdbcType="VARCHAR" />
+    <id column="sell_max" property="sellMax" jdbcType="VARCHAR" />
+    <id column="trade_min" property="tradeMin" jdbcType="VARCHAR" />
+    <id column="trade_max" property="tradeMax" jdbcType="VARCHAR" />
+    <id column="invit_buy" property="invitBuy" jdbcType="VARCHAR" />
+    <id column="invit_sell" property="invitSell" jdbcType="VARCHAR" />
+    <id column="invit_1" property="invit1" jdbcType="VARCHAR" />
+    <id column="invit_2" property="invit2" jdbcType="VARCHAR" />
+    <id column="invit_3" property="invit3" jdbcType="VARCHAR" />
+    <id column="zhang" property="zhang" jdbcType="VARCHAR" />
+    <id column="die" property="die" jdbcType="VARCHAR" />
+    <id column="hou_price" property="houPrice" jdbcType="VARCHAR" />
+    <id column="tendency" property="tendency" jdbcType="VARCHAR" />
+    <id column="trade" property="trade" jdbcType="INTEGER" />
+    <id column="new_price" property="newPrice" jdbcType="DECIMAL" />
+    <id column="buy_price" property="buyPrice" jdbcType="DECIMAL" />
+    <id column="sell_rice" property="sellPrice" jdbcType="DECIMAL" />
+    <id column="min_price" property="minPrice" jdbcType="DECIMAL" />
+    <id column="max_price" property="maxPrice" jdbcType="DECIMAL" />
+    <id column="volume" property="volume" jdbcType="DECIMAL" />
+    <id column="change" property="change" jdbcType="DECIMAL" />
+    <id column="api_min" property="apiMin" jdbcType="DECIMAL" />
+    <id column="api_max" property="apiMax" jdbcType="DECIMAL" />
+      <id column="begintrade" property="begintrade" jdbcType="VARCHAR" />
+      <id column="endtrade" property="endtrade" jdbcType="VARCHAR" />
+    <id column="sort" property="sort" jdbcType="INTEGER" />
+    <id column="status" property="status" jdbcType="INTEGER" />
+    <id column="jiaoyiqu" property="jiaoyiqu" jdbcType="INTEGER" />
+    <id column="addtime" property="addtime" jdbcType="BIGINT" />
+    <id column="endtime" property="endtime" jdbcType="BIGINT" />
+    <id column="faxingjia" property="faxingjia" jdbcType="FLOAT" />
+  </resultMap>
+
+  <select id="getInfoByParameter" resultMap="BaseResultMap" parameterType="tw.org.ktrade.robot.po.Market">
+    SELECT
+    *
+    FROM
+    xnb_market xm
+    WHERE 1 = 1
+    <if test="id != null" >
+      AND xm.id = #{id}
+    </if>
+    <if test="name != null" >
+      AND xm.name = #{name}
+    </if>
+  </select>
+  
+  <select id="queryMarketList" resultMap="BaseResultMap" parameterType="tw.org.ktrade.robot.po.Market">
+    SELECT
+    *
+    FROM xnb_market 
+  </select>
+
+  <select id="queryListByNameLike" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT
+    *
+    FROM
+    xnb_market xm
+    WHERE 1 = 1
+    <if test="coinName != null" >
+      AND xm.name LIKE concat('%',#{coinName})
+    </if>
+  </select>
+</mapper>

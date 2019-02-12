@@ -1,0 +1,46 @@
+
+
+#LOGGING
+logging:
+    config: classpath:logback-spring.xml
+server:
+    compression:
+        enabled: true
+        mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+    aop:
+        auto: true
+    datasource:
+        #schema: classpath:db.sql
+        name: core
+        url: jdbc:mysql://xxx.xxx.xxx.xxx:33072/xxxxxxxxx?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+        driverClassName: com.mysql.jdbc.Driver
+        username: root
+        password: 123456789
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 1000
+        initialSize: 5
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x' from dual
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+    mvc:
+        favicon:
+            enabled: false
+
+# MyBatis
+mybatis:
+    #mapper-locations: classpath*:tw/org/ico/dao/**/*.xml
+    config: classpath:mybatis-config.xml
+    
+
+ 

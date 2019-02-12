@@ -1,0 +1,76 @@
+
+logging:
+  file: C:/log/auth-dev.log
+  level:
+    root: Info
+    tw.org.ktrade.robot.controller: info
+    #tw.org.ico: info
+    #tw.org.ico.controller: 'ON'
+
+coin:
+  price:
+    hlc_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=HalalChain&vs_currencies=btc
+    xrp_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=ripple&vs_currencies=btc
+    nuls_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=nuls&vs_currencies=btc
+    fto_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=FuturoCoin&vs_currencies=btc
+    xmr_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Monero&vs_currencies=btc
+    hlc_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=halalchain&vs_currencies=eth
+    xrp_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=ripple&vs_currencies=eth
+    nuls_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=nuls&vs_currencies=eth
+    fto_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=FuturoCoin&vs_currencies=eth
+    xmr_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Monero&vs_currencies=eth
+    btc_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Bitcoin&vs_currencies=usd
+    eth_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Ethereum&vs_currencies=usd
+    xrp_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Ripple&vs_currencies=usd
+    nuls_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=nuls&vs_currencies=usd
+    hlc_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=halalchain&vs_currencies=usd
+    fto_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=FuturoCoin&vs_currencies=usd
+    dash_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Dash&vs_currencies=usd
+    xmr_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Monero&vs_currencies=usd
+    btx_usdt: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Bitcore&vs_currencies=usd
+    dash_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Dash&vs_currencies=btc
+    dash_eth: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Dash&vs_currencies=eth
+    eth_btc: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=Ethereum&vs_currencies=btc
+    all_coin: https://api.coingecko.com/api/v3/simple/price?include_24hr_change=true&ids=replaceIds&vs_currencies=replaceCurrency
+
+spring:
+  profiles:
+    active: dev
+server:
+  port: 8091
+--- 
+#開發環境配置
+spring:
+  profiles: dev
+  data.mongodb: 
+      host: xxx.xxx.xxx.xxx
+      port: 27018
+      database: admin
+  redis:  
+    database: 0
+    host: xxx.xxx.xxx.xxx
+    port: 6379
+    password: 123456789   
+    timeout:  30000
+server:
+  port: 8091
+---
+#測試環境配置
+spring:
+  profiles: uat
+server:
+  port: 8089
+---
+#正式環境配置
+spring:
+  profiles: prod
+server:
+  port: 8090
+  
+
+
+    
+
+
+  
+  
